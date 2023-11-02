@@ -5,7 +5,7 @@ const { NAME_OR_PASSWORD_REQUIRED, NAME_IS_ALRADY_EXISTS } = require('../config/
 const { findUserByName } = userService
 
 const verifyUser = async (ctx, next) => {
-  //判断逻辑
+  //判断是否为空
   const { name, password } = ctx.request.body
   if (!name || !password) {
     return ctx.app.emit('error', NAME_OR_PASSWORD_REQUIRED, ctx)
