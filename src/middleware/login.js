@@ -1,9 +1,12 @@
+const jwt = require('jsonwebtoken')
 const userService = require('../service/user')
 const {
   NAME_OR_PASSWORD_REQUIRED,
   NAME_IS_NOT_EXISTS,
-  PASSWORD_IS_INCORRENT
+  PASSWORD_IS_INCORRENT,
+  UNAUTHORIZATION
 } = require('../config/error')
+const { PUBLIC_KEY } = require('../config/screct')
 const { md5Password } = require('../utils/md5Password')
 const { findUserByName } = userService
 
@@ -20,6 +23,7 @@ const verifyLogin = async (ctx, next) => {
   if (!user) {
     return ctx.app.emit('error', NAME_IS_NOT_EXISTS, ctx)
   }
+
   //判断密码是否错误
   if (user.password !== md5Password(password)) {
     return ctx.app.emit('error', PASSWORD_IS_INCORRENT, ctx)
@@ -32,6 +36,28 @@ const verifyLogin = async (ctx, next) => {
   await next()
 }
 
+//验证token
+const verifyAuto = async (ctx, next) => {
+  //获取token
+  const authorization = ctx.headers.authorization
+  if (!authorization) {
+    return ctx.app.emit('error', UNAUTHORIZATION, ctx)
+  }
+  const token = authorization.replace('Bearer', '')
+  //验证token
+  try {
+    //获取token信息
+    const result = jwt.verify(token, PUBLIC_KEY, { algorithm: ['RS256'] })
+    //保留token信息
+    ctx.user = result
+    //执行下一个中间件
+    await next()
+  } catch (error) {
+    return ctx.app.emit('error', UNAUTHORIZATION, ctx)
+  }
+}
+
 module.exports = {
-  verifyLogin
+  verifyLogin,
+  verifyAuto
 }

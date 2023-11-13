@@ -16,6 +16,9 @@ class LoginController {
       data: { token, id, name }
     }
   }
+  test(ctx, next) {
+    ctx.body = '成功'
+  }
 }
 
 module.exports = new LoginController()

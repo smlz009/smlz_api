@@ -12,6 +12,7 @@ class UserController {
 
     //通知用户创建成功
     ctx.body = {
+      code: 0,
       message: '创建用户成功',
       data: result
     }
