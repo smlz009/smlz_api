@@ -7,7 +7,7 @@ class LoginController {
     const { id, name } = ctx.user
     //2.派发token
     const token = jwt.sign({ id, name }, PRIVATE_KEY, {
-      expiresIn: 24 * 60 * 60,
+      expiresIn: 72 * 60 * 60,
       algorithm: 'RS256'
     })
     //3.返回用户信息

@@ -40,6 +40,7 @@ const verifyLogin = async (ctx, next) => {
 const verifyAuto = async (ctx, next) => {
   //获取token
   const authorization = ctx.headers.authorization
+
   if (!authorization) {
     return ctx.app.emit('error', UNAUTHORIZATION, ctx)
   }

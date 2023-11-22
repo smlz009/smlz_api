@@ -4,7 +4,8 @@ const {
   NAME_IS_ALRADY_EXISTS,
   NAME_IS_NOT_EXISTS,
   PASSWORD_IS_INCORRENT,
-  UNAUTHORIZATION
+  UNAUTHORIZATION,
+  OPERATION_IS_NOT_ALLOWED
 } = require('../config/error')
 
 app.on('error', (error, ctx) => {
@@ -30,6 +31,9 @@ app.on('error', (error, ctx) => {
     case UNAUTHORIZATION:
       code = -1005
       message = '未授权'
+    case OPERATION_IS_NOT_ALLOWED:
+      code = -1006
+      message = '无权限'
   }
 
   ctx.body = { code, message }
