@@ -1,6 +1,6 @@
 const monentService = require('../service/moment')
 
-const { create, queryList, queryById, updateById, deteleById } = monentService
+const { create, queryList, queryById, updateById, deteleById, hasLabel, addLabel } = monentService
 
 class MonentController {
   async create(ctx, next) {
@@ -66,6 +66,29 @@ class MonentController {
     ctx.body = {
       code: 0,
       message: '删除成功'
+    }
+  }
+
+  async addLabels(ctx, next) {
+    const { momentId } = ctx.params
+    const { labels } = ctx
+    try {
+      for (const label of labels) {
+        //判断是否已经存在
+        const isExists = await hasLabel(momentId, label.id)
+        if (!isExists) {
+          const result = await addLabel(momentId, label.id)
+        }
+      }
+      ctx.body = {
+        code: 0,
+        message: '添加成功'
+      }
+    } catch (error) {
+      ctx.body = {
+        code: -3001,
+        message: error
+      }
     }
   }
 }

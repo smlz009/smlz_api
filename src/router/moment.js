@@ -1,6 +1,6 @@
 const KoaRouter = require('@koa/router')
 const { verifyAuto } = require('../middleware/login')
-const { create, list, detail, update, deleteMoment } = require('../controller/moment')
+const { create, list, detail, update, deleteMoment, addLabels } = require('../controller/moment')
 const { verifyPermission } = require('../middleware/permission')
 const { verifyLabelExists } = require('../middleware/label')
 
@@ -16,8 +16,6 @@ monentRouter.delete('/:momentId', verifyAuto, verifyPermission, deleteMoment)
 //改
 monentRouter.patch('/:momentId', verifyAuto, verifyPermission, update)
 //添加标签
-monentRouter.post('/:momentId/labels', verifyAuto, verifyPermission, verifyLabelExists, (ctx) => {
-  console.log(22)
-})
+monentRouter.post('/:momentId/labels', verifyAuto, verifyPermission, verifyLabelExists, addLabels)
 
 module.exports = monentRouter

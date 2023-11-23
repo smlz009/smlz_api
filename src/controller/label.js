@@ -11,7 +11,8 @@ class LabelController {
     const result = await create(name)
     ctx.body = {
       code: 0,
-      message: '保存成功'
+      message: '保存成功',
+      data: result
     }
   }
 }

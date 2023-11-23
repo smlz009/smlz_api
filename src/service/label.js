@@ -8,9 +8,9 @@ class LabelService {
   }
 
   async queryLabelByName(name) {
-    const statement = 'INSERT INTO `label`(name) VALUES(?);'
+    const statement = 'SELECT * FROM label WHERE name = ?;'
     const [result] = await connection.execute(statement, [name])
-    return result
+    return result[0]
   }
 }
 
