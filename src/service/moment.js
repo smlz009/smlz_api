@@ -2,7 +2,7 @@ const connection = require('../app/database')
 
 class MonentService {
   async create(content, userId) {
-    const statement = 'INSERT INTO `monent`(content, user_id) VALUES(?, ?);'
+    const statement = 'INSERT INTO `moment`(content, user_id) VALUES(?, ?);'
     const [result] = await connection.execute(statement, [content, userId])
     return result
   }
@@ -11,7 +11,7 @@ class MonentService {
   async queryList(offset = 0, size = 10) {
     const statement = `
       SELECT m.id id,m.content content,m.createAt createTime ,m.updateAt updateTime,
-      JSON_OBJECT('id',u.id,'name',u.name,'createTime',u.createAt,'updateTime','u.updateAt') user,
+      JSON_OBJECT('id',u.id,'name',u.name,'createTime',u.createAt,'updateTime',u.updateAt,'avatar_url',u.avatar_url) user,
       (SELECT COUNT(*) FROM comment WHERE comment.moment_id = m.id) commentCount,
       (SELECT COUNT(*) FROM moment_label ml WHERE ml.moment_id = m.id) labelCount
       FROM moment m
@@ -29,7 +29,7 @@ class MonentService {
       (
         SELECT JSON_ARRAYAGG(JSON_OBJECT(
           'id',c.id,'content',c.content,'createTime',c.createAt,'commentId',c.comment_id,
-          'user',JSON_OBJECT('id',cu.id,'name',cu.name)
+          'user',JSON_OBJECT('id',cu.id,'name',cu.name,'avatar_url',cu.avatar_url)
         ))
         FROM comment c 
         LEFT JOIN user cu ON cu.id = c.user_id

@@ -30,5 +30,6 @@ uploads
 *.key
 
 .vercel
+.env
 
 

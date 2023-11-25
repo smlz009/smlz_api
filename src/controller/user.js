@@ -3,7 +3,7 @@ const { queryAvatarWithId } = require('../service/file')
 const fs = require('fs')
 const { UPLOAD_PATH } = require('../config/path')
 
-const { create } = userService
+const { create, queryById } = userService
 
 class UserController {
   async create(ctx, next) {
@@ -26,8 +26,19 @@ class UserController {
     const avatarInfo = await queryAvatarWithId(userId)
     const { filename, mimetype } = avatarInfo
     ctx.type = mimetype
-    console.log(`${UPLOAD_PATH}${filename}`)
     ctx.body = fs.createReadStream(`${UPLOAD_PATH}/${filename}`)
+  }
+
+  async detail(ctx, next) {
+    console.log(ctx.params)
+    const { userId } = ctx.params
+    //根据id 查询详情
+    const result = await queryById(userId)
+
+    ctx.body = {
+      code: 0,
+      data: result[0]
+    }
   }
 }
 

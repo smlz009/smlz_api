@@ -1,7 +1,6 @@
 const KoaRouter = require('@koa/router')
 const { verifyAuto } = require('../middleware/login')
 const { create, reply } = require('../controller/comment')
-const { verifyPermission } = require('../middleware/permission')
 
 const commentRouter = new KoaRouter({ prefix: '/comment' })
 

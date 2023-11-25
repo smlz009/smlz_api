@@ -4,7 +4,6 @@ const { create } = LabelService
 
 class LabelController {
   async create(ctx, next) {
-    console.log(ctx)
     //1.获取标签名称
     const { name } = ctx.request.body
     //2.保存到数据库
