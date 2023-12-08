@@ -1,5 +1,5 @@
 const FileService = require('../service/file')
-const uploadFile = require('../utils/uploadToQiniu')
+// const uploadFile = require('../utils/uploadToQiniu')
 
 const { create, showAvatarImg } = FileService
 
