@@ -30,14 +30,11 @@ class UserController {
   }
 
   async detail(ctx, next) {
-    console.log(ctx.params)
-    const { userId } = ctx.params
-    //根据id 查询详情
-    const result = await queryById(userId)
+    const user = ctx.user
 
     ctx.body = {
       code: 0,
-      data: result[0]
+      data: user
     }
   }
 }

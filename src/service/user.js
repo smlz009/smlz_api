@@ -31,9 +31,17 @@ class UserService {
   }
 
   async queryById(userId) {
-    const statement = 'SELECT * FROM `user` WHERE id = ?;'
-    const result = await connection.execute(statement, [userId])
-    return result[0]
+    try {
+      const statement = `
+      SELECT u.id id,u.name name,u.avatar_url avatar_url,u.role_id role_id,r.menuIds menu 
+      FROM user u
+      LEFT JOIN role r ON r.id = u.role_id
+      WHERE u.id = ?;`
+      const result = await connection.execute(statement, [userId])
+      return result[0]
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

@@ -9,6 +9,7 @@ const app = new koa()
 //使用中间件
 app.use(bodyParser())
 app.use(cors())
+
 //注册路由
 registerRouter(app)
 
