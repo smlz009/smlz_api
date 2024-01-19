@@ -3,12 +3,12 @@ const Mock = require('mockjs')
 const Random = Mock.Random
 
 class LabelController {
-  async test(ctx, next) {
+  async question(ctx, next) {
     console.log(ctx)
     ctx.body = {
       code: 0,
       data: {
-        name: Random.cname()
+        id: Random.id()
       }
     }
   }
