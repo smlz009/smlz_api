@@ -1,10 +1,11 @@
 const KoaRouter = require('@koa/router')
 
-const { question } = require('../controller/question')
+const { getQuestionById, createQuestion, getQuestionList } = require('../controller/question')
 
-const labelRouter = new KoaRouter({ prefix: '/question' })
+const questionRouter = new KoaRouter({ prefix: '/question' })
 
-//增:新增标签
-labelRouter.get('/question', question)
+questionRouter.get('/:id', getQuestionById)
+questionRouter.post('/', createQuestion)
+questionRouter.get('/', getQuestionList)
 
-module.exports = labelRouter
+module.exports = questionRouter
