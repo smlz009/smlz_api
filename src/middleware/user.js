@@ -41,7 +41,7 @@ const handleUserMenu = async (ctx, next) => {
   const menuList = await queryList()
   // 3.获取角色所拥有的菜单 id
   const [user] = await queryById(userId)
-  const menuIdList = user.menu.split(',')
+  const menuIdList = user.menu?.split(',') || []
   // 4.循环获得对应的菜单
   menuIdList.forEach((item) => {
     const val = menuList.find((i) => i.id == item)
