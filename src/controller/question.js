@@ -9,7 +9,36 @@ class LabelController {
       code: 0,
       data: {
         id: Random.id(),
-        title: Random.ctitle()
+        title: Random.ctitle(),
+        desc: Random.ctitle(),
+        js: '',
+        css: '',
+        componentList: [
+          {
+            fe_id: Random.id(),
+            type: 'questionInfo',
+            title: '问卷标题',
+            isHidden: false,
+            isLocked: false,
+            props: { title: '申请开发', desc: '这是一个问卷描述' }
+          },
+          {
+            fe_id: Random.id(),
+            type: 'questionTitle',
+            title: '标题',
+            isHidden: false,
+            isLocked: false,
+            props: { text: '我是标题', level: 1, isCenter: false }
+          },
+          {
+            fe_id: Random.id(),
+            type: 'questionInput',
+            title: '输入框1',
+            isHidden: false,
+            isLocked: false,
+            props: { title: '我是输入框', placeholder: '请输入啊' }
+          }
+        ]
       }
     }
   }
