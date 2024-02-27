@@ -6,7 +6,10 @@ const {
   getQuestionList,
   editQuestion,
   duplicateQuestion,
-  deleteQuestion
+  deleteQuestion,
+  statQuestion,
+  statQuestionCount,
+  answer
 } = require('../controller/question')
 
 const questionRouter = new KoaRouter({ prefix: '/question' })
@@ -17,5 +20,8 @@ questionRouter.get('/', getQuestionList)
 questionRouter.patch('/:id', editQuestion)
 questionRouter.post('/duplicate/:id', duplicateQuestion)
 questionRouter.delete('/', deleteQuestion)
+questionRouter.get('/stat/:id', statQuestion)
+questionRouter.get('/stat/:id/:componentId', statQuestionCount)
+questionRouter.post('/answer', answer)
 
 module.exports = questionRouter

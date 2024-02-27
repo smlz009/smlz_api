@@ -17,10 +17,11 @@ class MenuController {
 
   async queryList(ctx, next) {
     const menuList = ctx.menuList
-    // console.log(menuList)
     ctx.body = {
       code: 0,
-      list: menuList
+      data: {
+        list: menuList
+      }
     }
   }
 }

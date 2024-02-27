@@ -7,6 +7,6 @@ const menuRouter = new KoaRouter({ prefix: '/menu' })
 
 //新增菜单
 menuRouter.post('/create', verifyAuto, create)
-menuRouter.get('/list', handleMneu, queryList)
+menuRouter.post('/list', handleMneu, queryList)
 
 module.exports = menuRouter
