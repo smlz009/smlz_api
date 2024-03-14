@@ -6,7 +6,7 @@ const connectionPool = new mysql.createPool({
   port: 3306,
   database: 'smlz_db',
   user: 'root',
-  password: 'Qq314156.',
+  password: 'qq314156',
   connectionLimit: 5
 })
 
