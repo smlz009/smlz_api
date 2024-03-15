@@ -13,6 +13,7 @@ const app = new koa()
 //使用中间件
 app.use(bodyParser())
 app.use(serve(path.join(__dirname, staticPath)))
+app.use(cors)
 
 //注册路由
 registerRouter(app)
